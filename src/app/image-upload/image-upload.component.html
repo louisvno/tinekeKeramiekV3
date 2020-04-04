@@ -1,0 +1,8 @@
+<div class="img-input-container">
+    <span>Afbeelding toevoegen: </span>
+    <input (change)="onImageAdd($event)" type="file" accept="image/*"/>
+</div>
+<mat-progress-bar  mode="determinate" value="{{pct | async}}"></mat-progress-bar>
+<button mat-button [disabled]='(uploadService.running | async) > 0'>
+    this button is disabled when 1 or more uploads are running
+</button>
