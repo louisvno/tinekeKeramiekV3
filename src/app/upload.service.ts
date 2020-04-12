@@ -25,13 +25,14 @@ import {Set}  from 'immutable';
  * }
  */
 export class UploadService {
-  // needs some state calculator
   private states = new Subject<Observable<UploadTaskSnapshot>>();
   state$ = this.states.pipe(
     mergeAll(),
     share()
   )
 
+  // Observable for current number of running uploads
+  // assumes fullpath is unique identifier
   public running = this.state$.pipe(
     scan((acc : Set<string>, curr:UploadTaskSnapshot) => {
        return curr.task.snapshot.state === firebase.storage.TaskState.RUNNING? 
